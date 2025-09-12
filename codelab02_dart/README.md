@@ -1,12 +1,9 @@
 # smt5_mobile
-<<<<<<< HEAD
+
  
- soal 1
-=======
 
 soal 1
 Modifikasilah kode pada baris 3 di VS Code atau Editor Code favorit Anda berikut ini agar mendapatkan keluaran (output) sesuai yang diminta!
->>>>>>> 936b684534938a98241b21846fe70ea8be58a99d
 void main() {
   for (int i = 18; i >= 9; i--) {
     print('Nama saya adalah Fulan, sekarang berumur $i');
@@ -15,11 +12,7 @@ void main() {
 
 
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 936b684534938a98241b21846fe70ea8be58a99d
 Soal 2
 Mengapa sangat penting untuk memahami bahasa pemrograman Dart sebelum kita menggunakan framework Flutter ? Jelaskan!
 jawab: 
