@@ -14,7 +14,7 @@ praktikum ini nerupakan cara menerapkan widget dasar
 
 
 Scaffold Widget & Dialog Widget
- ![Screenshoot hello_world](images/scafold%20&%20dialog.png)
+ ![Screenshoot hello_world](images/04.png.png)
 
  
 

@@ -14,104 +14,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Praktikum',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const PraktikumPage(),
+      title: 'Demo Widgets 3–7',
+      theme: ThemeData(primarySwatch: Colors.red),
+      home: const MyHomePage(title: 'Demo Widgets Flutter'),
     );
   }
 }
 
-class PraktikumPage extends StatelessWidget {
-  const PraktikumPage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Praktikum Flutter Widgets"),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          Text(
-            "1. Text Widget",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          MyTextWidget(),
-
-          Divider(),
-
-          Text(
-            "2. Image Widget",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          MyImageWidget(),
-
-          Divider(),
-
-          Text(
-            "3. Cupertino Button & Loading",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          LoadingCupertino(),
-
-          Divider(),
-
-          Text(
-            "4. Floating Action Button (FAB)",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          FabWidget(),
-
-          Divider(),
-
-          Text(
-            "5. Scaffold dengan Counter",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          ScaffoldWidget(),
-
-          Divider(),
-
-          Text(
-            "6. Dialog Widget",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          DialogWidget(),
-
-          Divider(),
-
-          Text(
-            "7. Date & Time Picker",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          DateTimePickerWidget(),
-        ],
-      ),
-    );
-  }
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-/// Scaffold Widget
-class ScaffoldWidget extends StatefulWidget {
-  const ScaffoldWidget({super.key});
-
-  @override
-  State<ScaffoldWidget> createState() => _ScaffoldWidgetState();
-}
-
-class _ScaffoldWidgetState extends State<ScaffoldWidget> {
+class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  DateTime selectedDate = DateTime.now();
+  final TextEditingController _nameController = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -119,92 +40,27 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("My Increment App"),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text("You have pushed the button this many times:"),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container(height: 50.0),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment Counter',
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      ),
-    );
-  }
-}
-
-/// Dialog Widget
-class DialogWidget extends StatelessWidget {
-  const DialogWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: const Text('Show Alert'),
-      onPressed: () {
-        showAlertDialog(context);
-      },
-    );
-  }
-
-  void showAlertDialog(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text("My Title"),
-      content: const Text("This is my message."),
-      actions: [
-        okButton,
-      ],
-    );
-
+  void _showAlertDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return AlertDialog(
+          title: const Text("My title"),
+          content: const Text("This is my message."),
+          actions: [
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
       },
     );
   }
-}
 
-/// Date & Time Picker Widget
-class DateTimePickerWidget extends StatefulWidget {
-  const DateTimePickerWidget({super.key});
-
-  @override
-  State<DateTimePickerWidget> createState() => _DateTimePickerWidgetState();
-}
-
-class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
-
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -218,33 +74,70 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked =
-        await showTimePicker(context: context, initialTime: selectedTime);
-    if (picked != null && picked != selectedTime) {
-      setState(() {
-        selectedTime = picked;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text("Tanggal: ${selectedDate.toLocal()}".split(' ')[0]),
-        Text("Jam: ${selectedTime.format(context)}"),
-        const SizedBox(height: 20.0),
-        ElevatedButton(
-          onPressed: () => _selectDate(context),
-          child: const Text('Pilih Tanggal'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            // Scaffold + Counter
+            Center(
+              child: Column(
+                children: [
+                  const Text('You have pushed the button this many times:'),
+                  Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Dialog
+            ElevatedButton(
+              onPressed: _showAlertDialog,
+              child: const Text("Show Alert Dialog"),
+            ),
+            const SizedBox(height: 20),
+
+            // TextField
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Nama',
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Date Picker
+            Column(
+              children: [
+                Text("Tanggal terpilih: ${selectedDate.toLocal()}".split(' ')[0]),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: _selectDate,
+                  child: const Text("Pilih Tanggal"),
+                ),
+              ],
+            ),
+          ],
         ),
-        const SizedBox(height: 10.0),
-        ElevatedButton(
-          onPressed: () => _selectTime(context),
-          child: const Text('Pilih Waktu'),
-        ),
-      ],
+      ),
+
+      // Floating Action Button
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment Counter',
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        child: Container(height: 50.0),
+      ),
     );
   }
 }
