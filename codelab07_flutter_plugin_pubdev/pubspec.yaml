@@ -1,0 +1,60 @@
+name: codelab06_flutter_plugin_pubdev
+description: "A new Flutter project."
+
+# Prevent accidental publishing to pub.dev
+publish_to: 'none'
+
+# Version and build number
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+# -------------------------------
+# Dependencies
+# -------------------------------
+# Semua package yang dibutuhkan aplikasi kamu.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Plugin tambahan
+  auto_size_text: ^3.0.0
+  cupertino_icons: ^1.0.8
+
+# -------------------------------
+# Dev Dependencies
+# -------------------------------
+# Package yang hanya digunakan saat testing atau pengembangan.
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Linter untuk menjaga kualitas kode
+  flutter_lints: ^5.0.0
+
+# -------------------------------
+# Flutter Specific Configuration
+# -------------------------------
+flutter:
+
+  # Mengaktifkan penggunaan Material Icons
+  uses-material-design: true
+
+  # Contoh jika kamu ingin menambahkan assets (gambar, font, dll)
+  # Aktifkan bagian ini jika perlu nanti
+  # assets:
+  #   - images/
+  #
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
